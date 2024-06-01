@@ -49,13 +49,12 @@ main {
         padding: 0 20px;
 
         img {
-            margin-bottom: 30px;
-            height: 200px;
-            width: 200px;
+            height: 120px;
+            width: 120px;
         }
 
         h2 {
-            margin-bottom: 45px;
+            margin-bottom: 20px;
             font-size: 20px;
             font-weight: bold;
         }
@@ -81,6 +80,10 @@ main {
 
             &.btn-secondary{
                 border: 1.4px solid $primary-color;
+            }
+
+            &:disabled{
+                opacity: 0.8;
             }
         }
 

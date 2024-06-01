@@ -1,0 +1,32 @@
+<app-default-login-layout 
+    title="Entre na sua conta" 
+    primaryBtnText="Faça Login" 
+    secondaryBtnText="Registre-se" 
+    (submit)="submit()"
+    (navigate)="navigate()"
+    [disabledPrimaryBtn]="!loginForm.valid"
+>
+    <form [formGroup]="loginForm">
+        <app-primary-input
+            formControlName="email"
+            type="email"
+            inputName="email"
+            placeholderText="email@email.com"
+            label="Email"
+        >
+            <img class="icon" src="/assets/images/icons8-email-50.png" alt="Ícone de envolope simbolizando ícone de e-mail.">
+        </app-primary-input>
+
+        <app-primary-input 
+            formControlName="password"
+            type="password" 
+            inputName="password" 
+            placeholderText="digite sua senha.."
+            label="Senha" 
+        >
+            <img class="icon" src="/assets/images/icons8-password-50.png" alt="Ícone de envolope simbolizando ícone de e-mail.">
+        </app-primary-input>
+
+        <span>Esqueceu a senha?</span>
+    </form>
+</app-default-login-layout>
