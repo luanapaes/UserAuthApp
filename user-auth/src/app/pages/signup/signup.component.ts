@@ -6,40 +6,48 @@ import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { ToastrService } from 'ngx-toastr';
 
+interface signUpForm {
+  name: FormControl,
+  email: FormControl,
+  password: FormControl,
+  passwordConfirm: FormControl,
+}
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-signup',
   standalone: true,
   imports: [
     DefaultLoginLayoutComponent, ReactiveFormsModule,
     PrimaryInputComponent
   ],
   providers: [LoginService],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  templateUrl: './signup.component.html',
+  styleUrl: './signup.component.scss'
 })
-export class LoginComponent{
-  loginForm!: FormGroup;
+export class SignUpComponent{
+  signUpForm!: FormGroup<signUpForm>;
 
   constructor(
       private router: Router,
       private loginService: LoginService,
       private toastrService: ToastrService
     ) {
-    this.loginForm = new FormGroup({
+    this.signUpForm = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(6)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      passwordConfirm: new FormControl('', [Validators.required, Validators.minLength(6)])
     })
   }
 
   submit(){
-    this.loginService.login(this.loginForm.value.name, this.loginForm.value.password).subscribe({
+    this.loginService.login(this.signUpForm.value.name, this.signUpForm.value.password).subscribe({
       next: () => this.toastrService.success("Login realizado com sucesso!"),
       error: () =>  this.toastrService.error("Tente novamente mais tarde")
     })
   }
 
   navigate(){
-    this.router.navigate(["signup"])
+    this.router.navigate(["login"])
   }
 }
